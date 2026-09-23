@@ -1,0 +1,75 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { PLUGIN_ID, PLUGIN_RELEASES, PLUGIN_REPO, SITE_NAME } from "../lib/site";
+---
+
+<Layout title={`Install · ${SITE_NAME}`} description="Install Codazo for Obsidian from a GitHub release, configure a provider profile, and what to expect from local models.">
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Install</span>
+        <h2>From a GitHub release, today.</h2>
+        <p>Codazo has not been submitted to the community plugin directory yet. Until then, install it by hand. Obsidian 1.11.5 or newer is required for Secret Storage.</p>
+      </div>
+
+      <div class="prose">
+        <ol>
+          <li>Open the <a href={PLUGIN_RELEASES} rel="noreferrer">latest release</a> and download <code>main.js</code>, <code>manifest.json</code>, and <code>styles.css</code>.</li>
+          <li>In your vault, create the folder <code>.obsidian/plugins/{PLUGIN_ID}/</code> and put the three files in it.</li>
+          <li>In Obsidian, open <strong>Settings › Community plugins</strong>, reload, and enable <strong>Codazo</strong>.</li>
+        </ol>
+        <p>The release page lists a SHA-256 for each file. The <a href={PLUGIN_REPO} rel="noreferrer">repository</a> holds the readable source and the same unminified <code>main.js</code>, so you can build it yourself with <code>npm ci &amp;&amp; npm run build</code>.</p>
+
+        <h2>Configure a provider profile</h2>
+        <p>Open <strong>Settings › Codazo</strong> and create a profile. You can keep several and pick the active one.</p>
+        <table>
+          <thead><tr><th>Service</th><th>Endpoint</th><th>Notes</th></tr></thead>
+          <tbody>
+            <tr><td>OpenAI</td><td><code>https://api.openai.com/v1</code></td><td>Fixed. Works with <code>json_object</code>.</td></tr>
+            <tr><td>Ollama Cloud</td><td><code>https://ollama.com/v1</code></td><td>Fixed. Hosted inference, not local. Use the exact model tag.</td></tr>
+            <tr><td>Personalizado</td><td>any OpenAI-compatible base URL</td><td>OpenRouter, a local server, and so on. HTTPS, or plain HTTP only to <code>localhost</code>, a <code>.local</code> name, or a private-network address.</td></tr>
+          </tbody>
+        </table>
+        <p>
+          The key is sent only to that profile's destination, never to Codazo. Store it for the session, or on this device through Obsidian's Secret Storage; there is no plaintext fallback.
+          Changing a profile's destination asks for a new key. Deleting a profile deletes its key.
+        </p>
+
+        <h2>Local models</h2>
+        <p>A local server such as LM Studio works with a custom profile, with three settings that matter:</p>
+        <ul>
+          <li><strong>Formato de respuesta:</strong> <code>json_schema</code>. Local servers usually reject <code>json_object</code>, and instructions alone let small models drift off the contract.</li>
+          <li><strong>Campo de límite de tokens:</strong> <code>max_tokens</code>.</li>
+          <li><strong>Tiempo máximo de espera:</strong> raise it; a local model may take a minute or two.</li>
+        </ul>
+        <p>
+          Prefer models that answer directly. Reasoning models spend their whole budget thinking and often never produce the JSON inside the timeout.
+          In a check against LM Studio, a small non-reasoning model satisfied the contract in <code>json_schema</code> mode; a 30-billion-parameter reasoning model never answered.
+          Any model, local or hosted, can still break the contract; when it does, the notice names the field or rule it broke.
+        </p>
+
+        <h2>Your Codazo folder</h2>
+        <p>Saved notes go under the folder set in settings, <code>Codazo</code> by default:</p>
+        <table>
+          <thead><tr><th>Subfolder</th><th>Holds</th></tr></thead>
+          <tbody>
+            <tr><td><code>Reviews</code></td><td>Saved reviews, with the exact source and a reloadable payload.</td></tr>
+            <tr><td><code>Study</code></td><td>Study sheets, also reloadable.</td></tr>
+            <tr><td><code>Extractos</code></td><td>Excerpts of text you are reading, always saved.</td></tr>
+            <tr><td><code>Revisions</code></td><td>Your own revision notes, created on request.</td></tr>
+            <tr><td><code>Palabras</code> and <code>Verbos</code></td><td>One note per word and per verb-and-tense, with a <code>codazo-progreso</code> property.</td></tr>
+            <tr><td><code>Exports</code></td><td>JSON and HTML exports.</td></tr>
+          </tbody>
+        </table>
+        <p>Files are never overwritten; a name collision gets a new name, and word and verb notes that already exist are left alone.</p>
+
+        <h2>Other settings</h2>
+        <ul>
+          <li><strong>Interface language:</strong> Spanish (default) or English, for the plugin's own text only.</li>
+          <li><strong>Pane sections start open:</strong> summary, observations, words, and verbs are collapsible; choose whether they begin open or closed.</li>
+          <li><strong>Save reviews automatically</strong> and <strong>Create word and verb notes automatically:</strong> both off by default.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,76 @@
+---
+import { loadSampleReview } from "../lib/sample";
+
+const sample = loadSampleReview();
+const categoryLabel: Record<string, string> = { spelling: "Ortografía / acento", grammar: "Gramática", verb: "Verbo / tiempo", alternative: "Alternativa natural" };
+---
+
+<figure class="sample">
+  <div class="sample-note-window">
+    <div class="sample-toolbar"><span class="sample-title">Diario / Lunes.md</span><span class="sample-action">Codazo: Review selection</span></div>
+    <p class="sample-source" lang="es">
+      {sample.segments.map((segment) =>
+        segment.annotation ? (
+          <mark class:list={["anchor", `anchor-${segment.annotation.category}`]} title={categoryLabel[segment.annotation.category]}>{segment.text}</mark>
+        ) : (
+          segment.text
+        ),
+      )}
+    </p>
+    <p class="sample-strength"><span class="sample-label">Lo que ya funciona</span>{sample.strengths[0]}</p>
+  </div>
+
+  <ul class="sample-notes" aria-label="Codazo pane">
+    {sample.annotations.map((annotation) => (
+      <li class:list={["sample-note", `note-${annotation.category}`]}>
+        <span class="sample-note-head">
+          <span class="sample-note-category">{annotation.optional ? "Una alternativa opcional" : categoryLabel[annotation.category]}</span>
+          <span class="sample-note-quote" lang="es">«{annotation.quote}»</span>
+        </span>
+        <p class="sample-suggestion">{annotation.optional ? "Sugerencia opcional:" : "Sugerencia:"} <span lang="es">{annotation.suggestion}</span></p>
+        <p class="sample-note-notice">{annotation.explanation}</p>
+        <details>
+          <summary>Un poco más de práctica</summary>
+          <p><strong>Observa.</strong> {annotation.notice} <em>{annotation.question}</em></p>
+          <p><strong>Pista.</strong> {annotation.hint}</p>
+        </details>
+      </li>
+    ))}
+  </ul>
+
+  <figcaption>
+    Synthetic sample from the project's authored fixtures, shown to illustrate the feedback contract. It is not a live model response, and Codazo never presents samples as AI output.
+  </figcaption>
+</figure>
+
+<style>
+  .sample { margin: 0; display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+  @media (min-width: 900px) { .sample { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); } .sample figcaption { grid-column: 1 / -1; } }
+  .sample-note-window { background: var(--paper); border: 1px solid #e6e3da; border-radius: 4px; box-shadow: 0 5px 20px #342f2010; padding: clamp(1.2rem, 3vw, 2rem); }
+  .sample-toolbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; border-bottom: 1px solid var(--line); padding-bottom: 0.8rem; margin-bottom: 1.4rem; }
+  .sample-title { font: 500 0.95rem var(--mono); color: #8a857b; }
+  .sample-action { font: 500 0.78rem var(--sans); color: var(--paper); background: var(--olive); border-radius: 5px; padding: 0.35rem 0.7rem; }
+  .sample-source { font: 1.45rem/1.7 var(--serif); color: var(--ink); }
+  mark.anchor { background: transparent; color: inherit; border-radius: 2px; padding: 0 0.05em; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .anchor-verb { border-bottom: 2px solid var(--verb); background: var(--verb-wash); }
+  .anchor-spelling { border-bottom: 2px solid var(--grammar); background: var(--alternative-wash); }
+  .anchor-grammar { border-bottom: 2px solid #3b6ea5; background: var(--grammar-wash); }
+  .anchor-alternative { border-bottom: 2px dotted var(--olive); background: var(--olive-wash); }
+  .sample-strength { margin-top: 1.6rem; font-size: 0.92rem; color: var(--olive-deep); display: flex; gap: 0.6rem; align-items: baseline; }
+  .sample-label { font: 600 0.68rem var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: var(--olive); }
+  .sample-notes { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.75rem; align-content: start; }
+  .sample-note { background: var(--paper); border: 1px solid #e6e3da; border-left-width: 4px; border-radius: var(--radius); padding: 0.9rem 1rem; font-size: 0.92rem; }
+  .note-verb { border-left-color: var(--verb); }
+  .note-spelling { border-left-color: var(--grammar); }
+  .note-grammar { border-left-color: #3b6ea5; }
+  .note-alternative { border-left-color: var(--olive); }
+  .sample-note-head { display: flex; gap: 0.6rem; align-items: baseline; margin-bottom: 0.3rem; flex-wrap: wrap; }
+  .sample-note-category { font: 600 0.68rem var(--sans); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .sample-note-quote { font: 1rem var(--serif); color: var(--muted); }
+  .sample-suggestion span { font-family: var(--serif); color: var(--ink); font-size: 1.05rem; }
+  .sample-note-notice { color: var(--ink); margin-top: 0.3rem; }
+  details { margin-top: 0.5rem; }
+  summary { cursor: pointer; color: var(--focus); font-size: 0.85rem; }
+  details p { margin-top: 0.4rem; color: var(--muted); }
+  figcaption { font-size: 0.85rem; color: var(--muted); }
+</style>

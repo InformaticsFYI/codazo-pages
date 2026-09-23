@@ -1,0 +1,87 @@
+---
+import { Image } from "astro:assets";
+import appIcon from "../assets/codazo.svg";
+import "../styles/global.css";
+import { ORGANIZATION_NAME, PLUGIN_REPO, PRODUCT_PHRASE, SITE_DESCRIPTION, SITE_NAME, href } from "../lib/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = `${SITE_NAME}: ${PRODUCT_PHRASE} in your vault`, description = SITE_DESCRIPTION } = Astro.props;
+
+const socialImageUrl = new URL(href("/og.jpg").replace(/\/$/, ""), Astro.site);
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const navLinks = [
+  { href: href("/"), label: "Overview" },
+  { href: href("/how-it-works"), label: "How it works" },
+  { href: href("/install"), label: "Install" },
+];
+const isCurrent = (link: string) => link.replace(/\/$/, "") === currentPath;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="The Codazo app icon on a paper background." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <link rel="icon" type="image/svg+xml" href={href("/favicon.svg").replace(/\/$/, "")} />
+    <link rel="icon" type="image/png" href={href("/favicon-32x32.png").replace(/\/$/, "")} sizes="32x32" />
+    <link rel="apple-touch-icon" href={href("/apple-touch-icon.png").replace(/\/$/, "")} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="page">
+      <nav class="nav" aria-label="Site">
+        <div class="container nav-inner">
+          <a href={href("/")} class="nav-brand" aria-label="Codazo for Obsidian home">
+            <Image src={appIcon} alt="" width={28} height={28} densities={[1, 2]} format="svg" loading="eager" />
+            <span class="nav-brand-name">Codazo</span>
+            <span class="nav-brand-sub">for Obsidian</span>
+          </a>
+          <div class="nav-links">
+            {navLinks.map((link) => (
+              <a class="nav-link" href={link.href} aria-current={isCurrent(link.href) ? "page" : undefined}>{link.label}</a>
+            ))}
+            <a class="nav-link" href={PLUGIN_REPO} rel="noreferrer">Source</a>
+          </div>
+        </div>
+      </nav>
+
+      <main class="main">
+        <slot />
+      </main>
+
+      <footer class="footer">
+        <div class="container footer-inner">
+          <div class="footer-brand">
+            <Image src={appIcon} alt="" width={20} height={20} densities={[1, 2]} format="svg" loading="lazy" decoding="async" />
+            <span>&copy; {new Date().getFullYear()} {ORGANIZATION_NAME}</span>
+          </div>
+          <div class="footer-links">
+            <a href={href("/how-it-works")}>How it works</a>
+            <a href={href("/install")}>Install</a>
+            <a href={PLUGIN_REPO} rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

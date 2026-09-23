@@ -1,0 +1,23 @@
+{
+  "name": "codazo-pages",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Static site for the Codazo Obsidian plugin, published to GitHub Pages.",
+  "engines": {
+    "node": ">=24.18.0 <25"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check"
+  },
+  "dependencies": {
+    "astro": "7.3.2"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "typescript": "6.0.3"
+  }
+}

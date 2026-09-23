@@ -1,0 +1,32 @@
+---
+import { LEARNING_LOOP } from "../lib/site";
+
+const details: Record<(typeof LEARNING_LOOP)[number], string> = {
+  write: "Draft in Spanish on a paper-like page. Nothing leaves your device while you write.",
+  feedback: "When you choose, ask for a review. Your original text is preserved exactly.",
+  revise: "Accept, adapt, or ignore each suggestion. Every revision is a separate, attributable version.",
+  "cumulative study": "Vocabulary, verbs, and conjugation references grow from your own writing.",
+  export: "Take the whole session with you as JSON or standalone HTML, any time.",
+};
+---
+
+<ol class="loop">
+  {LEARNING_LOOP.map((step, index) => (
+    <li class="loop-step">
+      <span class="loop-index" aria-hidden="true">{index + 1}</span>
+      <h3>{step}</h3>
+      <p>{details[step]}</p>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .loop { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); counter-reset: step; }
+  .loop-step { position: relative; background: var(--paper); border: 1px solid #e6e3da; border-radius: var(--radius); padding: 1.4rem 1.3rem 1.3rem; box-shadow: 0 4px 18px #342f2008; }
+  .loop-index { display: inline-grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--olive-wash); color: var(--olive-deep); font: 600 0.8rem var(--sans); margin-bottom: 0.9rem; }
+  .loop-step h3 { font-size: 1.25rem; text-transform: capitalize; margin-bottom: 0.45rem; }
+  .loop-step p { font-size: 0.93rem; color: var(--muted); }
+  @media (min-width: 1024px) {
+    .loop-step:not(:last-child)::after { content: "→"; position: absolute; right: -0.95rem; top: 1.45rem; color: #b9b3a6; font-size: 1.1rem; }
+  }
+</style>

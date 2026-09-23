@@ -1,0 +1,143 @@
+---
+import Layout from "../layouts/Layout.astro";
+import LearningLoop from "../components/LearningLoop.astro";
+import FeedbackSample from "../components/FeedbackSample.astro";
+import { PLUGIN_REPO, PRODUCT_PHRASE, href } from "../lib/site";
+---
+
+<Layout>
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="eyebrow">{PRODUCT_PHRASE} · Obsidian plugin</span>
+      <h1 class="hero-title">Compose your thoughts.<br />Grow with feedback.</h1>
+      <p class="hero-sub">
+        Codazo reviews what you write,
+        informs what you read, and turns both
+        into study notes you own, all inside your <strong><a href={"https://obsidian.md"}>Obsidian vault</a></strong> and only when you request it.
+        Your own composition is never rewritten.
+      </p>
+      <div class="hero-actions">
+        <a class="button" href={href("/install")}>Install</a>
+        <a class="button secondary" href={href("/how-it-works")}>See how it works</a>
+        <a class="button secondary" href={PLUGIN_REPO} rel="noreferrer">Source on GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Your vault is the library</span>
+        <h2>Codazo is an addon to support you.</h2>
+        <p><strong><a href={"https://obsidian.md"}>Obsidian</a></strong> is a free application. Your notes, folders, links, and sync stay exactly as they are. Codazo helps with one thing: improving your Spanish using gentle nudges from AI.</p>
+      </div>
+      <LearningLoop />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Feedback that stays anchored</span>
+        <h2>Suggestions point at your exact words.</h2>
+        <p>
+          Every note is focused on your text, and phrases are marked for easy viewing and review while the passage is unchanged.
+          Hover a mark in the Codazo pane to peek at the observation; open it for the suggestion, explanation, and a little practice.
+        </p>
+      </div>
+      <FeedbackSample />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Principles</span>
+        <h2>Built to nudge, not to overwhelm or solve.</h2>
+      </div>
+      <div class="grid">
+        <article class="card"><span class="card-mark mark-olive" aria-hidden="true">✎</span><h3>Your note is not modified</h3><p>Reviews, revisions, and study sheets are new notes that you can modify with your own notes. The original stays yours.</p></article>
+        <article class="card"><span class="card-mark mark-verb" aria-hidden="true">⏎</span><h3>AI helps only when you ask</h3><p>When you request a review or study guide, a window shows the exact text that will be sent and requires your confirmation.</p></article>
+        <article class="card"><span class="card-mark mark-grammar" aria-hidden="true">!</span><h3>Responses guide you</h3><p>Responses from your AI provider give you a chance to learn and adjust.  Study guides can help you learn new content.</p></article>
+        <article class="card"><span class="card-mark mark-brand" aria-hidden="true">⌂</span><h3>Your provider, your key</h3><p>OpenAI, Ollama Cloud, or any OpenAI-compatible API endpoint. Keys live in Obsidian's Secret Storage or session memory, and not in plugin data.</p></article>
+        <article class="card"><span class="card-mark mark-alt" aria-hidden="true">≡</span><h3>Sources you can check</h3><p>Conjugation tables come from a built-in, open-source reference, and not from a model's guess.</p></article>
+        <article class="card"><span class="card-mark mark-olive" aria-hidden="true">↗</span><h3>Nothing hidden</h3><p>No telemetry, no account, no vault indexing, no background reading. You choose what is shared with your AI provider.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Three ways to ask</span>
+        <h2>Review what you wrote. Explain what you are reading. Help study anything.</h2>
+        <p>Select text, right-click, and pick one. Each shows you exactly what will be sent before anything leaves your content.</p>
+      </div>
+      <div class="grid">
+        <article class="card"><span class="card-mark mark-grammar" aria-hidden="true">✎</span><h3>Review</h3><p>For your own Spanish. Corrections and optional alternatives, each anchored to your words, with an incremental discovery from a tip to the full explanation. Add what you meant in English, so you can ensure your intentions are considered in responses.</p></article>
+        <article class="card"><span class="card-mark mark-alt" aria-hidden="true">≡</span><h3>Study guide</h3><p>No observations, just material: words above your selected level with meanings and examples, and the verbs you used with the tense in play and a full conjugation table.</p></article>
+        <article class="card"><span class="card-mark mark-verb" aria-hidden="true">“</span><h3>Excerpt</h3><p>For text you are reading. A word gets its meaning and, if it is a verb form, its infinitive and tense. A phrase gets its literal reading, how people actually use it, and register. A paragraph becomes a study guide with a few stretch items. The meaning stays folded until you open it, so you can try first.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div class="section-head">
+        <span class="eyebrow">Notes you own</span>
+        <h2>Everything lands in your vault as Markdown.</h2>
+        <p>
+          Codazo output is stored under a folder you choose, supporting Obsidian search and filtering. Nothing is written until you ask,
+          or you can turn on automatic saving and let the notes accumulate.  You can edit your own Codazo notes to personalize your learning and understanding.
+        </p>
+      </div>
+      <ul class="feature-list">
+        <li><strong>Reviews, study sheets, excerpts.</strong> Readable notes with the exact source and a computer-friendly document the plugin reads before showing it again, so nothing needs re-running.</li>
+        <li><strong>Words and verbs.</strong> One note per word in <code>Palabras/</code> and one per verb and tense in <code>Verbos/</code>, each with a <code>codazo-progreso</code> progress/proficiency property you set: <em>nuevo</em>, <em>con-problemas</em>, <em>necesita-trabajo</em>, <em>casi-listo</em>, <em>dominado</em>. Existing notes are never touched.</li>
+        <li><strong>Linked revision.</strong> A copy of the passage in a new note, linked to the source and the review, for you to rewrite.</li>
+        <li><strong>Index.</strong> The pane lists everything saved, grouped by kind with the open note's items first. Pick any review, study sheet, or excerpt and it loads back with no model call.</li>
+        <li><strong>Exports.</strong> JSON or a script-free HTML page, saved into your vault.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div class="section-head">
+        <span class="eyebrow">Small tools</span>
+        <h2>Reading helpers that need no model at all.</h2>
+      </div>
+      <ul class="feature-list">
+        <li><strong>Inline translations.</strong> Select a word or phrase, add its English, and it becomes <code>{"{botas|boots}"}</code>: plain text that shows as the Spanish with an underline and the translation on hover, in both editing and reading views.</li>
+        <li><strong>English intent.</strong> One click inserts a folded "spoiler" callout for what you meant to say. Reviews read it automatically and keep it out of the Spanish that is sent.</li>
+        <li><strong>Provider profiles.</strong> Several, one active: OpenAI, Ollama Cloud, or any OpenAI-compatible endpoint. Keys live in Obsidian's Secret Storage or session memory.</li>
+        <li><strong>Interface in Spanish or English.</strong> One setting for the plugin's own text. Codazo's feedback and saved notes keep their wording.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Status</span>
+        <h2>Early, open, and honest about it.</h2>
+        <p>The plugin is open source and installable for free through the Obsidian Community (Coming Soon - Release is in progress).</p>
+      </div>
+      <div class="hero-actions"><a class="button" href={href("/install")}>Install from a release</a></div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero { padding-block: clamp(4rem, 10vw, 8rem) clamp(3rem, 7vw, 5.5rem); background: radial-gradient(ellipse at top left, #fffefa 0%, var(--desk) 60%); }
+  .hero-inner { max-width: 52rem; }
+  .hero-title { font-size: clamp(2.6rem, 7vw, 4.6rem); letter-spacing: -0.035em; line-height: 1.05; }
+  .hero-sub { margin-top: 1.5rem; font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--muted); max-width: 38rem; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+  .split { display: grid; gap: 2rem; align-items: start; }
+  .split .section-head { margin-bottom: 0; }
+  @media (min-width: 900px) { .split { grid-template-columns: 1.1fr 1fr; gap: 4rem; } }
+  .feature-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
+  .feature-list li { background: var(--paper); border: 1px solid #e6e3da; border-radius: var(--radius); padding: 1rem 1.2rem; color: var(--muted); font-size: 0.98rem; }
+  .feature-list strong { color: var(--olive-deep); font-weight: 600; }
+</style>
