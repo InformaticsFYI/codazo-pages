@@ -1,24 +1,27 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { PLUGIN_ID, PLUGIN_RELEASES, PLUGIN_REPO, SITE_NAME } from "../lib/site";
+import { COMMUNITY_URL, OBSIDIAN_INSTALL_LINK, PLUGIN_ID, PLUGIN_RELEASES, PLUGIN_REPO, SITE_NAME } from "../lib/site";
 ---
 
-<Layout title={`Install · ${SITE_NAME}`} description="Install Codazo for Obsidian from a GitHub release, configure a provider profile, and what to expect from local models.">
+<Layout title={`Install · ${SITE_NAME}`} description="Install Codazo from Obsidian's community plugins, configure a provider profile, and what to expect from local models.">
   <section class="section">
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Install</span>
-        <h2>From a GitHub release, today.</h2>
-        <p>Codazo has not been submitted to the community plugin directory yet. Until then, install it by hand. Obsidian 1.11.5 or newer is required for Secret Storage.</p>
+        <h2>From Obsidian's community plugins.</h2>
+        <p>Codazo is listed in Obsidian's community plugin directory. Obsidian desktop 1.11.5 or newer is required; mobile is not supported yet.</p>
       </div>
 
       <div class="prose">
         <ol>
-          <li>Open the <a href={PLUGIN_RELEASES} rel="noreferrer">latest release</a> and download <code>main.js</code>, <code>manifest.json</code>, and <code>styles.css</code>.</li>
-          <li>In your vault, create the folder <code>.obsidian/plugins/{PLUGIN_ID}/</code> and put the three files in it.</li>
-          <li>In Obsidian, open <strong>Settings › Community plugins</strong>, reload, and enable <strong>Codazo</strong>.</li>
+          <li>In Obsidian, open <strong>Settings › Community plugins</strong>. If this is your first community plugin, turn off Restricted mode.</li>
+          <li>Choose <strong>Browse</strong>, search for <strong>Codazo</strong>, and select <strong>Install</strong>. Or open <a href={OBSIDIAN_INSTALL_LINK}>Codazo directly in Obsidian</a>.</li>
+          <li>Select <strong>Enable</strong>, then open <strong>Settings › Codazo</strong> to add a provider profile.</li>
         </ol>
-        <p>The release page lists a SHA-256 for each file. The <a href={PLUGIN_REPO} rel="noreferrer">repository</a> holds the readable source and the same unminified <code>main.js</code>, so you can build it yourself with <code>npm ci &amp;&amp; npm run build</code>.</p>
+        <p>
+          The <a href={COMMUNITY_URL} rel="noreferrer">directory page</a> shows the current version. Prefer to install by hand? Each <a href={PLUGIN_RELEASES} rel="noreferrer">GitHub release</a> carries <code>main.js</code>, <code>manifest.json</code>, and <code>styles.css</code> with SHA-256 checksums; put them in <code>.obsidian/plugins/{PLUGIN_ID}/</code>.
+          The <a href={PLUGIN_REPO} rel="noreferrer">repository</a> holds the readable source and the same unminified <code>main.js</code>, so you can build it yourself with <code>npm ci &amp;&amp; npm run build</code>.
+        </p>
 
         <h2>Configure a provider profile</h2>
         <p>Open <strong>Settings › Codazo</strong> and create a profile. You can keep several and pick the active one.</p>

@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import LearningLoop from "../components/LearningLoop.astro";
 import FeedbackSample from "../components/FeedbackSample.astro";
-import { PLUGIN_REPO, PRODUCT_PHRASE, href } from "../lib/site";
+import { OBSIDIAN_INSTALL_LINK, PLUGIN_REPO, PRODUCT_PHRASE, href } from "../lib/site";
 ---
 
 <Layout>
@@ -17,7 +17,8 @@ import { PLUGIN_REPO, PRODUCT_PHRASE, href } from "../lib/site";
         Your own composition is never rewritten.
       </p>
       <div class="hero-actions">
-        <a class="button" href={href("/install")}>Install</a>
+        <a class="button" href={OBSIDIAN_INSTALL_LINK}>Install in Obsidian</a>
+        <a class="button secondary" href={href("/install")}>Install guide</a>
         <a class="button secondary" href={href("/how-it-works")}>See how it works</a>
         <a class="button secondary" href={PLUGIN_REPO} rel="noreferrer">Source on GitHub</a>
       </div>
@@ -87,7 +88,7 @@ import { PLUGIN_REPO, PRODUCT_PHRASE, href } from "../lib/site";
         <span class="eyebrow">Notes you own</span>
         <h2>Everything lands in your vault as Markdown.</h2>
         <p>
-          Codazo output is stored under a folder you choose, supporting Obsidian search and filtering. Nothing is written until you ask,
+          Codazo output is stored under a folder you choose, supporting Obsidian search and filtering. Reviews and study guides are written only when you ask (or when you turn on automatic saving); excerpts are saved as notes by design,
           or you can turn on automatic saving and let the notes accumulate.  You can edit your own Codazo notes to personalize your learning and understanding.
         </p>
       </div>
@@ -120,10 +121,10 @@ import { PLUGIN_REPO, PRODUCT_PHRASE, href } from "../lib/site";
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Status</span>
-        <h2>Early, open, and honest about it.</h2>
-        <p>The plugin is open source and installable for free through the Obsidian Community (Coming Soon - Release is in progress).</p>
+        <h2>Available now, in Obsidian’s community plugins.</h2>
+        <p>Codazo is open source and listed in Obsidian’s community plugin directory, so it installs and updates from inside Obsidian. Desktop only for now; mobile will follow once it has been verified on real devices.</p>
       </div>
-      <div class="hero-actions"><a class="button" href={href("/install")}>Install from a release</a></div>
+      <div class="hero-actions"><a class="button" href={OBSIDIAN_INSTALL_LINK}>Install in Obsidian</a><a class="button secondary" href={href("/install")}>Install guide</a></div>
     </div>
   </section>
 </Layout>
