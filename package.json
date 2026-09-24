@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Static site for the Codazo Obsidian plugin, published to GitHub Pages.",
+  "description": "Site for Codazo for Obsidian, served at https://plugin.codazo.io/ from GitHub Pages.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/InformaticsFYI/codazo-pages.git"
+  },
+  "license": "Apache-2.0",
   "engines": {
     "node": ">=24.18.0 <25"
   },
@@ -11,13 +16,16 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "typecheck": "astro check"
+    "typecheck": "astro check",
+    "test": "vitest run",
+    "ci": "npm run typecheck && npm test && npm run build"
   },
   "dependencies": {
     "astro": "7.3.2"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.10",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "vitest": "5.0.0"
   }
 }

@@ -1,24 +1,11 @@
 # Codazo for Obsidian — site
 
-Static Astro site for the Codazo Obsidian plugin, published to GitHub Pages from the public `InformaticsFYI/codazo-pages` repository. It shares no runtime code with the plugin or the apps and never calls a provider.
+The public site for the Codazo Obsidian plugin, served at **https://plugin.codazo.io/** from GitHub Pages. Static Astro; no application code, no provider calls, no analytics.
 
-It is a sibling of `apps/marketing` with the same palette and components, focused on the plugin: overview, how it works, and install. The feedback illustration reads a committed copy of the project's synthetic fixture (`src/data/sample-review.json`); `tests/pages` checks it stays identical to the shared fixture.
+- Plugin: https://github.com/InformaticsFYI/codazo-obsidian (also listed in Obsidian's community plugins as `codazo`).
+- Develop: `npm ci`, then `npm run dev` for http://localhost:4181/ and `npm run ci` for the Astro check, tests, and build.
+- Deploy: merging to `main` runs the Deploy workflow, which builds and publishes `dist/` to the `gh-pages` branch. `public/CNAME` keeps GitHub Pages pointed at the custom domain.
 
-## Run
+The feedback illustration on the home page is built from `src/data/sample-review.json`, a synthetic fixture authored for the Codazo review contract. It is labeled as a sample on the page and is not a model response.
 
-```sh
-cd apps/pages
-npm run dev        # http://localhost:4181/
-npm run typecheck  # astro check
-npm run build      # static output in dist/
-```
-
-From the repository root: `npm run pages:dev`, `npm run pages:typecheck`, `npm run pages:build`.
-
-## Base path
-
-The site is served at the custom domain `https://plugin.codazo.io/`, so `astro.config.mjs` defaults to that site and `base = /`, and `public/CNAME` carries the domain so every publish keeps GitHub Pages pointed at it. Every internal link goes through `href()` in `src/lib/site.ts`, which respects the base, so the site would also work under a repository sub-path by setting `PAGES_BASE`.
-
-## Publishing
-
-See `docs/operations/pages-publish.md`. Nothing publishes on push.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow.
