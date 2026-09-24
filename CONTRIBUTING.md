@@ -1,6 +1,6 @@
 # Contributing to the Codazo for Obsidian site
 
-This repository is the site's home. Branch from `main`, open a pull request against `main`, and CI will run the Astro check, the tests, and a build. Merging to `main` deploys to https://plugin.codazo.io/ automatically.
+This repository is the site's home. Branch from `dev` and open a pull request against `dev`; CI runs the Astro check, the tests, and a build. Merging `dev` into `main` deploys to https://plugin.codazo.io/ automatically, so `main` is always what the site shows.
 
 ```sh
 npm ci

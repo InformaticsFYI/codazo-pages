@@ -1,12 +1,12 @@
 name: CI
 
-# Every pull request and every push to main: Astro check, tests, and a build.
+# Every pull request to dev or main, and every push to dev or main: Astro check, tests, and a build.
 
 on:
   pull_request:
-    branches: [main]
+    branches: [dev, main]
   push:
-    branches: [main]
+    branches: [dev, main]
 
 permissions:
   contents: read
